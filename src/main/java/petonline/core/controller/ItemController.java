@@ -6,13 +6,14 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import petonline.core.config.Paths;
 import petonline.core.exceptions.ApiException;
 import petonline.core.model.Item;
 import petonline.core.model.dto.ItemDTO;
 import petonline.core.service.ItemService;
 
 @RestController
-@RequestMapping("/items")
+@RequestMapping(Paths.CONFIG_ITEMS)
 public class ItemController {
 
     @Autowired
@@ -21,8 +22,8 @@ public class ItemController {
 
     @PostMapping
     @ResponseBody
-    public ResponseEntity<Item>save(@RequestBody Item item) {
-        return new ResponseEntity<>(this.service.save(item), HttpStatus.CREATED);
+    public ResponseEntity<ItemDTO>save(@RequestBody ItemDTO item) {
+        return new ResponseEntity<>(ItemDTO.toDTO(this.service.save(Item.toEntity(item))), HttpStatus.CREATED);
     }
 
     @GetMapping(path = "/{id}")

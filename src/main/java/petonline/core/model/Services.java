@@ -1,6 +1,7 @@
 package petonline.core.model;
 
 import lombok.*;
+import petonline.core.model.dto.ServicesDTO;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -30,4 +31,14 @@ public class Services {
 
     @Column(name = "VALUE", nullable = false)
     private BigDecimal value;
+
+    public static Services toEntity(ServicesDTO dto) {
+        return Services.builder()
+                .id(dto.getId())
+                .name(dto.getName())
+                .description(dto.getDescription())
+                .isActive(dto.getIsActive())
+                .value(dto.getValue())
+                .build();
+    }
 }

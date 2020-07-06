@@ -17,6 +17,19 @@ create table SERVICES (
     PRIMARY KEY (ID)
 );
 
+create table SERVICE_ORDER (
+    ID INT NOT NULL ,
+    SERVICES_ID INT NOT NULL,
+    DISCOUNT_VALUE numeric(16),
+    SERVICE_DATE date NOT NULL,
+    OBSERVATION VARCHAR(300),
+    FOREIGN KEY (SERVICES_ID) REFERENCES SERVICES (ID),
+    PRIMARY KEY (ID)
+
+);
+
 create sequence ITEM_SEQ start 1;
 create sequence SERVICES_SEQ start 1;
+create sequence SERVICE_ORDER_SEQ start 1;
+
 

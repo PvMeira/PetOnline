@@ -1,6 +1,6 @@
 package petonline.core.exceptions;
 
-public class ApiException extends Exception {
+public class ApiException extends RuntimeException {
 
     private String message;
 

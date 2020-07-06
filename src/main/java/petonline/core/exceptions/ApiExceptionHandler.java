@@ -14,5 +14,10 @@ public class ApiExceptionHandler {
     protected ResponseEntity<ApiErrorResponse> handleApiException(ApiException ex) {
         return new ResponseEntity<>(new ApiErrorResponse(HttpStatus.I_AM_A_TEAPOT, ex.getMessage(), Instant.now()), HttpStatus.I_AM_A_TEAPOT);
     }
+
+    @ExceptionHandler({ SaleException.class })
+    protected ResponseEntity<ApiErrorResponse> handleSaleException(SaleException ex) {
+        return new ResponseEntity<>(new ApiErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), Instant.now()), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }
 

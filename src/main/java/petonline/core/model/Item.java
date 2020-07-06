@@ -35,6 +35,9 @@ public class Item {
     @Column(name = "QUANTITY", nullable = false)
     private Integer quantity = 0;
 
+    @Transient
+    private Integer salesQuantity;
+
     @Column(name = "IMAGE")
     private String image;
 
@@ -43,6 +46,7 @@ public class Item {
         return Item.builder()
                    .id(dto.getId())
                    .name(dto.getName())
+                   .salesQuantity(dto.getSalesQuantity())
                    .description(dto.getDescription())
                    .image(dto.getImage())
                    .quantity(dto.getQuantity())

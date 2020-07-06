@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import petonline.core.config.Paths;
+import petonline.core.exceptions.ApiException;
+import petonline.core.exceptions.SaleException;
 import petonline.core.model.Sale;
 import petonline.core.model.dto.SaleDTO;
 import petonline.core.service.SaleService;
@@ -22,7 +24,7 @@ public class SaleController {
 
     @PostMapping
     @ResponseBody
-    public ResponseEntity<SaleDTO> save(@RequestBody SaleDTO saleDTO) {
+    public ResponseEntity<SaleDTO> save(@RequestBody SaleDTO saleDTO) throws SaleException {
         return new ResponseEntity<>(SaleDTO.toDTO(this.service.save(Sale.toEntity(saleDTO))), HttpStatus.CREATED);
     }
 

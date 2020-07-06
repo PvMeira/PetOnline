@@ -21,6 +21,7 @@ public class ItemDTO {
     private BigDecimal value;
     private Integer quantity;
     private String image;
+    private Integer salesQuantity;
 
 
     public static ItemDTO toDTO(Item item) {

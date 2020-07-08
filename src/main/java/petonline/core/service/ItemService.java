@@ -28,6 +28,15 @@ public class ItemService {
         return this.repository.save(item);
     }
 
+    public Item update(Integer id, Item item) throws ApiException {
+        Item itemForEdit = this.find(id);
+        if(null != itemForEdit) {
+            item.setId(id);
+            return this.save(item);
+        }
+        throw  new ApiException("No Item was found for the given ID");
+    }
+
     /**
      * Default FIND using the given ID
      * @param id

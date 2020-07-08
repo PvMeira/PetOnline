@@ -26,6 +26,13 @@ public class ItemController {
         return new ResponseEntity<>(ItemDTO.toDTO(this.service.save(Item.toEntity(item))), HttpStatus.CREATED);
     }
 
+    @PutMapping(path = "/{id}")
+    @ResponseBody
+    public ResponseEntity<ItemDTO> update(  @PathVariable(name = "id", required = true) Integer id
+                                          , @RequestBody ItemDTO item) {
+        return new ResponseEntity<>(ItemDTO.toDTO(this.service.update(id,Item.toEntity(item))), HttpStatus.OK);
+    }
+
     @GetMapping(path = "/{id}")
     @ResponseBody
     public ResponseEntity<ItemDTO>find(@PathVariable(name = "id", required = true) Integer id) {

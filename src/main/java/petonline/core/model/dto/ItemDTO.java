@@ -37,6 +37,6 @@ public class ItemDTO {
 
     public static Page<ItemDTO> toPageDTO(Page<Item> page) {
         List<ItemDTO> content = page.map(ItemDTO::toDTO).getContent();
-        return new PageImpl<>(content,page.getPageable(),content.size());
+        return new PageImpl<>(content,page.getPageable(),page.getTotalElements());
     }
 }

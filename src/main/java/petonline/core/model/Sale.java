@@ -72,6 +72,6 @@ public class Sale {
 
     public static Page<Sale> toSaleDTO(Page<SaleDTO> sale) {
         List<Sale> content = sale.map(Sale::toEntity).getContent();
-        return new PageImpl<>(content,sale.getPageable(),content.size());
+        return new PageImpl<>(content,sale.getPageable(),sale.getTotalElements());
     }
 }

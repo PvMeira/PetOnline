@@ -35,6 +35,6 @@ public class ServiceOrderDTO {
 
     public static Page<ServiceOrderDTO> toPageDTO(Page<ServiceOrder> page) {
         List<ServiceOrderDTO> content = page.map(ServiceOrderDTO::toDTO).getContent();
-        return new PageImpl<>(content,page.getPageable(),content.size());
+        return new PageImpl<>(content,page.getPageable(),page.getTotalElements());
     }
 }

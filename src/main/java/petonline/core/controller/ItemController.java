@@ -41,10 +41,10 @@ public class ItemController {
 
     @GetMapping(path = "/search")
     @ResponseBody
-    public ResponseEntity<Page<ItemDTO>> search(  @RequestParam(name = "page",defaultValue = "0") Integer page
+    public ResponseEntity<Page<ItemDTO>> search(  @RequestParam(name = "page",defaultValue = "1") Integer page
                                              , @RequestParam(name = "size",defaultValue = "10") Integer size
                                              , @RequestParam(name = "name", defaultValue = "") String name) {
-        return new ResponseEntity<>(ItemDTO.toPageDTO(this.service.search(name, PageRequest.of(page, size))), HttpStatus.OK);
+        return new ResponseEntity<>(ItemDTO.toPageDTO(this.service.search(name, PageRequest.of(page -1, size))), HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/{id}")

@@ -52,6 +52,6 @@ public class SaleDTO {
 
     public static Page<SaleDTO> toPageSaleDTO(Page<Sale> sale) {
         List<SaleDTO> content = sale.map(SaleDTO::toDTO).getContent();
-        return new PageImpl<>(content,sale.getPageable(),content.size());
+        return new PageImpl<>(content,sale.getPageable(),sale.getTotalElements());
     }
 }

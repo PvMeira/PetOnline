@@ -47,6 +47,6 @@ public class ServiceOrder {
 
     public static Page<ServiceOrder> toPageEntity(Page<ServiceOrderDTO> page) {
         List<ServiceOrder> content = page.map(ServiceOrder::toEntity).getContent();
-        return new PageImpl<>(content,page.getPageable(),content.size());
+        return new PageImpl<>(content,page.getPageable(),page.getTotalElements());
     }
 }

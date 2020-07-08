@@ -56,7 +56,7 @@ public class Item {
 
     public static Page<Item> toPageDTO(Page<ItemDTO> page) {
         List<Item> content = page.map(Item::toEntity).getContent();
-        return new PageImpl<>(content,page.getPageable(),content.size());
+        return new PageImpl<>(content,page.getPageable(),page.getTotalElements());
     }
 
 }

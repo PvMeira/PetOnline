@@ -4,7 +4,7 @@ create table ITEM (
     DESCRIPTION VARCHAR(300),
     VALUE numeric(16) NOT NULL,
     QUANTITY numeric(10) NOT NULL,
-    IMAGE VARCHAR(8000),
+    IMAGE VARCHAR(10485760)  ,
     PRIMARY KEY (ID)
 );
 

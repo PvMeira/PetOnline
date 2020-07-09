@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import petonline.core.exceptions.ApiException;
 import petonline.core.model.Item;
 import petonline.core.repository.ItemRepository;
@@ -27,7 +28,7 @@ public class ItemService {
     public Item save(Item item) {
         return this.repository.save(item);
     }
-
+    @Transactional
     public Item update(Integer id, Item item) throws ApiException {
         Item itemForEdit = this.find(id);
         if(null != itemForEdit) {

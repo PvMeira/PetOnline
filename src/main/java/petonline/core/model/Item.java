@@ -38,25 +38,25 @@ public class Item {
     @Transient
     private Integer salesQuantity;
 
-    @Column(name = "IMAGE")
+    @Column(name = "IMAGE", columnDefinition = "TEXT")
     private String image;
 
 
     public static Item toEntity(ItemDTO dto) {
         return Item.builder()
-                   .id(dto.getId())
-                   .name(dto.getName())
-                   .salesQuantity(dto.getSalesQuantity())
-                   .description(dto.getDescription())
-                   .image(dto.getImage())
-                   .quantity(dto.getQuantity())
-                   .value(dto.getValue())
-                   .build();
+                .id(dto.getId())
+                .name(dto.getName())
+                .salesQuantity(dto.getSalesQuantity())
+                .description(dto.getDescription())
+                .image(dto.getImage())
+                .quantity(dto.getQuantity())
+                .value(dto.getValue())
+                .build();
     }
 
     public static Page<Item> toPageDTO(Page<ItemDTO> page) {
         List<Item> content = page.map(Item::toEntity).getContent();
-        return new PageImpl<>(content,page.getPageable(),page.getTotalElements());
+        return new PageImpl<>(content, page.getPageable(), page.getTotalElements());
     }
 
 }

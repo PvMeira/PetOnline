@@ -26,17 +26,17 @@ public class ItemDTO {
 
     public static ItemDTO toDTO(Item item) {
         return ItemDTO.builder()
-                      .id(item.getId())
-                      .name(item.getName())
-                      .description(item.getDescription())
-                      .image(item.getImage())
-                      .quantity(item.getQuantity())
-                      .value(item.getValue())
-                      .build();
+                .id(item.getId())
+                .name(item.getName())
+                .description(item.getDescription())
+                .image(item.getImage())
+                .quantity(item.getQuantity())
+                .value(item.getValue())
+                .build();
     }
 
     public static Page<ItemDTO> toPageDTO(Page<Item> page) {
         List<ItemDTO> content = page.map(ItemDTO::toDTO).getContent();
-        return new PageImpl<>(content,page.getPageable(),page.getTotalElements());
+        return new PageImpl<>(content, page.getPageable(), page.getTotalElements());
     }
 }

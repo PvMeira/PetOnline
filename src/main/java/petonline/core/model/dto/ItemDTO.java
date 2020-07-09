@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import petonline.core.model.Item;
+import petonline.core.model.domain.category.Category;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -22,6 +23,7 @@ public class ItemDTO {
     private Integer quantity;
     private String image;
     private Integer salesQuantity;
+    private Category category;
 
 
     public static ItemDTO toDTO(Item item) {
@@ -32,6 +34,7 @@ public class ItemDTO {
                 .image(item.getImage())
                 .quantity(item.getQuantity())
                 .value(item.getValue())
+                .category(item.getCategory())
                 .build();
     }
 

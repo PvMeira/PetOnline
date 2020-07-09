@@ -3,6 +3,7 @@ package petonline.core.model;
 import lombok.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import petonline.core.model.domain.category.Category;
 import petonline.core.model.dto.ItemDTO;
 
 import javax.persistence.*;
@@ -41,6 +42,9 @@ public class Item {
     @Column(name = "IMAGE", columnDefinition = "TEXT")
     private String image;
 
+    @Column(name = "CATEGORY", nullable = false)
+    private Category category;
+
 
     public static Item toEntity(ItemDTO dto) {
         return Item.builder()
@@ -51,6 +55,7 @@ public class Item {
                 .image(dto.getImage())
                 .quantity(dto.getQuantity())
                 .value(dto.getValue())
+                .category(dto.getCategory())
                 .build();
     }
 

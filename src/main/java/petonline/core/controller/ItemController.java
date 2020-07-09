@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.*;
 import petonline.core.config.Paths;
 import petonline.core.exceptions.ApiException;
 import petonline.core.model.Item;
+import petonline.core.model.domain.category.Category;
 import petonline.core.model.dto.ItemDTO;
 import petonline.core.service.ItemService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(Paths.CONFIG_ITEMS)
@@ -44,6 +47,12 @@ public class ItemController {
     @ResponseBody
     public ResponseEntity<Page<ItemDTO>> findAll() {
         return new ResponseEntity<>(ItemDTO.toPageDTO(this.service.findAll()), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/categories")
+    @ResponseBody
+    public ResponseEntity<Category[]> listCategories() {
+        return new ResponseEntity<>(Category.values(), HttpStatus.OK);
     }
 
     @GetMapping(path = "/search")

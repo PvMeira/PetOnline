@@ -1,9 +1,13 @@
 package petonline.core.model.dto;
 
 import lombok.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import petonline.core.model.Item;
 import petonline.core.model.Services;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,5 +31,9 @@ public class ServicesDTO {
                 .isActive(services.getIsActive())
                 .value(services.getValue())
                 .build();
+    }
+    public static Page<ServicesDTO> toPageDTO(Page<Services> page) {
+        List<ServicesDTO> content = page.map(ServicesDTO::toDTO).getContent();
+        return new PageImpl<>(content, page.getPageable(), page.getTotalElements());
     }
 }

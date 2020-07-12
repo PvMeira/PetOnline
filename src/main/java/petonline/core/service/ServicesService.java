@@ -1,8 +1,13 @@
 package petonline.core.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import petonline.core.exceptions.ApiException;
+import petonline.core.model.Item;
 import petonline.core.model.Services;
 import petonline.core.repository.ServicesRepository;
 
@@ -25,12 +30,32 @@ public class ServicesService {
         return this.repository.save(service);
     }
 
+    @Transactional
+    public Services update(Integer id, Services services) throws ApiException {
+        Services servicesForEdit = this.find(id);
+        if(null != servicesForEdit) {
+            services.setId(id);
+            return this.save(services);
+        }
+        throw  new ApiException("No Services was found for the given ID");
+    }
+
     /**
-     * Default FindAll action for SERVICES
-     * @return a Iterable objct of the existing Services
+     * Default FIND ALL with Page Request
+     * @return A PAGE WITH THE CONTENT OF Services TABLE
      */
-    public Iterable<Services> findAll() {
-        return this.repository.findAll();
+    public Page<Services> findAll() {
+        return this.repository.findAll(PageRequest.of(0,20));
+    }
+
+    /**
+     * Search Services method thar recives a name for use in the query
+     * @param name Required to pass, "" if no filter needs to be applied
+     * @param pageable Size and Page
+     * @return A PAGE with the content of search
+     */
+    public Page<Services>search(String name, Pageable pageable) {
+        return this.repository.search(name, pageable);
     }
 
     /**

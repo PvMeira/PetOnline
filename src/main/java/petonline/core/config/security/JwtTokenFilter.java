@@ -1,8 +1,10 @@
 package petonline.core.config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.filter.GenericFilterBean;
 import petonline.core.exceptions.ApiException;
 
@@ -11,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class JwtTokenFilter extends GenericFilterBean {
@@ -24,7 +27,9 @@ public class JwtTokenFilter extends GenericFilterBean {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-            throws IOException, ServletException {
+            throws IOException, ServletException, ApiException {
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse res = (HttpServletResponse) response;
         try {
             String token = tokenProvider.resolveToken((HttpServletRequest) request);
             if (null != token && tokenProvider.validateToken(token)) {
@@ -35,7 +40,8 @@ public class JwtTokenFilter extends GenericFilterBean {
             }
             chain.doFilter(request, response);
         } catch (ApiException e) {
-            e.printStackTrace();
+            res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            chain.doFilter(request, response);
         }
     }
 }

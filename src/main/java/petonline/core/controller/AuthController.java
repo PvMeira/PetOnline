@@ -8,6 +8,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
+import petonline.core.config.Paths;
 import petonline.core.config.security.JwtTokenProvider;
 import petonline.core.model.User;
 import petonline.core.model.dto.LoginRequest;
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping(Paths.AUTH)
 public class AuthController {
 
     @Autowired

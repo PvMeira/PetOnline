@@ -11,6 +11,8 @@ import petonline.core.model.Item;
 import petonline.core.model.Services;
 import petonline.core.repository.ServicesRepository;
 
+import java.util.List;
+
 @Service
 public class ServicesService {
 
@@ -47,6 +49,8 @@ public class ServicesService {
     public Page<Services> findAll() {
         return this.repository.findAll(PageRequest.of(0,20));
     }
+
+    public List<Services> findAllWithoutPage() {return this.repository.findAllWithoutPagination();}
 
     /**
      * Search Services method thar recives a name for use in the query

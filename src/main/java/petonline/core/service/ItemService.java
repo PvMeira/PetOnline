@@ -10,6 +10,8 @@ import petonline.core.exceptions.ApiException;
 import petonline.core.model.Item;
 import petonline.core.repository.ItemRepository;
 
+import java.util.List;
+
 @Service
 public class ItemService {
 
@@ -54,6 +56,8 @@ public class ItemService {
     public Page<Item> findAll() {
         return this.repository.findAll(PageRequest.of(0,20));
     }
+
+    public List<Item> findAllWithoutPage() {return this.repository.findAllWhitouPagination();}
 
     /**
      * Search ITEM method thar recives a name for use in the query
